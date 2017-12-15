@@ -143,7 +143,6 @@ function fillEducation() {
   document.querySelector('#end_educ_out').innerHTML = '- ' + endMonthEduc + ' ' + endYearEduc;
 };
 
-
 //Imprimir CV
 
   var buttonCv = document.querySelector('.print-button');
@@ -153,15 +152,13 @@ function fillEducation() {
   function printCv(){
   var divPrint = document.getElementById('cv_part');
   divPrint.style.display="block";
-
-  var contenido= divPrint.innerHTML;
-  var contenidoOriginal= document.body.innerHTML;
-
-  document.body.innerHTML = contenido;
-
-  window.print();
+  var winPrint = window.open('','','left=0,width=800,height=900');
+  winPrint.document.write('<link rel="stylesheet" href="styles/master.css" media="all">');
+  winPrint.document.write(divPrint.innerHTML);
+  winPrint.document.close();
+  winPrint.document.focus();
+  winPrint.print();
+  window.close();
 
   document.body.innerHTML = contenidoOriginal;
 }
-
-//Meter imagen en CV
