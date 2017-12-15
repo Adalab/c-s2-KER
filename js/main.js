@@ -40,7 +40,7 @@ for(i in monthArray){
 }
 var monthsAll = document.querySelectorAll('.month');
 for (var j = 0; j < monthsAll.length;j++) {
-    monthsAll[j].innerHTML = selectMonths;
+  monthsAll[j].innerHTML = selectMonths;
 };
 
 // Desplegables año
@@ -53,29 +53,44 @@ for (var initYear = 1950; initYear < years; initYear++) {
 };
 var yearsAll = document.querySelectorAll('.year');
 for (var i = 0; i < yearsAll.length;i++) {
-    yearsAll[i].innerHTML = selectYears;
+  yearsAll[i].innerHTML = selectYears;
 };
 
 //Pasar HABILIDADES del form al cv
 
-var userSkills = document.querySelector('.user-skills');
+//añadir el all dentro de la funcion del evento
 var skillsButton = document.querySelector('#skills-button');
 var cvSkills = document.querySelector('.list-skills');
 
 skillsButton.addEventListener('click', skillsToCv);
 
 function skillsToCv() {
-  var userSkillsValue = userSkills.value;
-  cvSkills.innerHTML += '<li><h4>' + userSkillsValue + '</h4></li>';
+  var userSkills = document.querySelectorAll('.skills-text');
+  for (var i = 0; i < userSkills.length; i++) {
+    var userSkillsValue = userSkills[i].value;
+    cvSkills.innerHTML += '<li><h4>' + userSkillsValue + '</h4></li>';
+  };
 };
 
 //Añadir una nueva Habilidad
 var addNewSkill = document.querySelector('#add-skills');
+var userNewSkills = document.querySelector('.user-new-skills');
 addNewSkill.addEventListener('click', newSkill);
 function newSkill() {
-  var userSkillsValue = userSkills.value;
-  userSkills.value = '';
+    userNewSkills.classList.remove('hidden');
 };
+
+//Quitar Habilidad
+var quitButtonSkill = document.querySelector('#quit-skills');
+var userDeleteSkills = document.querySelector('.user-new-skills');
+quitButtonSkill.addEventListener('click', quitSkill);
+function quitSkill() {
+  userDeleteSkills.classList.add('hidden');
+  userDeleteSkills.value = '';
+};
+
+//Mover elemento hacia arriba (-1 en su posición dentro del array)
+
 
 //Pasar IDIOMA del form al cv
 var userLanguage = document.querySelector('.user-language');
@@ -90,6 +105,7 @@ function languageToCv() {
   var userLevelValue = userLevel.value;
   cvLanguage.innerHTML = '<li><h4>' + userLanguageValue + '</h4><p>' + userLevelValue + '</p></li>';
 };
+
 
 /*JS Meter datos en el cv Contactos*/
 
@@ -145,11 +161,12 @@ function fillEducation() {
 
 //Imprimir CV
 
+
   var buttonCv = document.querySelector('.print-button');
   buttonCv.addEventListener('click',printCv);
 
-
   function printCv(){
+
   var divPrint = document.getElementById('cv_part');
   divPrint.style.display="block";
   var winPrint = window.open('','','left=0,width=800,height=900');
@@ -162,3 +179,19 @@ function fillEducation() {
 
   document.body.innerHTML = contenidoOriginal;
 }
+
+
+//Boton final de guardar datos en el CV
+
+var finalSaveButton = document.querySelector('#save');
+
+finalSaveButton.addEventListener('click', saveAll);
+
+function saveAll(event) {
+  event.preventDefault();
+  saveFunction();
+  skillsToCv();
+  languageToCv();
+  fillExperience();
+  fillEducation();
+};
