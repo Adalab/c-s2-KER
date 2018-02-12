@@ -3,4 +3,4 @@ cv by ker
 
 Proyecto grupal del segundo sprint - Adalab
 
-Web que cree CV a partir de datos introducidos en un formulario usando JS
+Web que crea CV- interactivo a partir de datos introducidos en un formulario usando JS, HTML, CSS, SCRUM
